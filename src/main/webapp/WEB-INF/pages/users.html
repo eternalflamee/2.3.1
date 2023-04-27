@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div>
+    <form method="post" th:action="@{/}" th:object="${user}">
+        <div>
+            <label for="name">Name</label>
+            <input id="name" placeholder="Enter Name" required autocomplete="off"
+                   th:field="*{name}" type="text"/>
+        </div>
+        <div>
+            <label for="age">Age</label>
+            <input id="age" placeholder="Enter age" required autocomplete="off"
+                   th:field="*{age}" type="text"/>
+        <div>
+            <input type="submit" value="Create User">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+    <br>
+    <table th:border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Edit</th>
+        </tr>
+        <tr th:if="${#lists.isEmpty(listUsers)}">
+            <td colspan="6">No Records found. Add some user!</td>
+        </tr>
+        <tr th:each="user : ${listUsers}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.age}"></td>
+            <td><a th:href="@{/{id}(id=${user.id})}">&#9998</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
